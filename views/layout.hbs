@@ -5,8 +5,22 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    {{#if user}}
+      <a href="#">Caca</a>
+      <a href="#">Search</a>
+      <a href="/logout">Logout</a>
+      {{else}}
+      <p><a href="/login">Lorgin</a>or<a href="/signup">Signup</a></p>
+
+
+    {{/if}}
+      {{#if user}}
+          {{user.username}}
+      {{/if}}
+
 
     {{{body}}}
+
 
     <script src='/javascripts/script.js'></script>
   </body>

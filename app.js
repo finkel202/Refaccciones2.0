@@ -17,15 +17,25 @@ const LocalStrategy = require('passport-local').Strategy;
 const MongoStore = require('connect-mongo')(session);
 const flash      = require("connect-flash");
 const User = require("./models/user");
+// const Parts = require("")
 
 mongoose.Promise = Promise;
-mongoose
-  .connect('mongodb://deathflyercharlie:ag2NEjnvy8lyevtH@cluster0-shard-00-00-eevwd.mongodb.net:27017,cluster0-shard-00-01-eevwd.mongodb.net:27017,cluster0-shard-00-02-eevwd.mongodb.net:27017/lab-nodemailer?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true', {useMongoClient: true})
-  .then(() => {
-    console.log('Connected to Mongo Refacciones!')
-  }).catch(err => {
-    console.error('Error connecting to mongo', err)
-  });
+mongoose.connect("mongodb://localhost/refacciones",{useMongoClient: true})
+.then(()=>{
+  console.log("Conected to Mongo")
+})
+.catch(err =>{
+  console.log("Error conecting to mongo", err)
+});
+
+// mongoose.Promise = Promise;
+// mongoose
+//   .connect('mongodb://deathflyercharlie:ag2NEjnvy8lyevtH@cluster0-shard-00-00-eevwd.mongodb.net:27017,cluster0-shard-00-01-eevwd.mongodb.net:27017,cluster0-shard-00-02-eevwd.mongodb.net:27017/lab-nodemailer?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true', {useMongoClient: true})
+//   .then(() => {
+//     console.log('Connected to Mongo Refacciones!')
+//   }).catch(err => {
+//     console.error('Error connecting to mongo', err)
+//   });
 
 
 const app_name = require('./package.json').name;
@@ -46,7 +56,7 @@ app.use(require('node-sass-middleware')({
   dest: path.join(__dirname, 'public'),
   sourceMap: true
 }));
-      
+
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -67,7 +77,7 @@ app.use(session({
 }));
 
 passport.serializeUser((user, cb) => {
-  cb(null, user._id);
+  cb(null, user.id);
 });
 
 passport.deserializeUser((id, cb) => {
@@ -96,7 +106,13 @@ passport.use(new LocalStrategy({
   });
 }));
 
-
+app.use((req,res,next)=>{
+  if(req.user){
+    console.log(req.user);
+    res.locals.username = req.user.username;
+  }
+  next();
+});
 
 
 app.use(passport.initialize());
