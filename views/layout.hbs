@@ -11,12 +11,14 @@
       <a href="/logout">Logout</a>
       {{else}}
       <p><a href="/login">Lorgin</a>or<a href="/signup">Signup</a></p>
+      {{#if user.role === "admin"}}
 
-
-    {{/if}}
-      {{#if user}}
-          {{user.username}}
       {{/if}}
+
+
+    {{#if user}}
+        {{user.username}}
+    {{/if}}
 
 
     {{{body}}}
