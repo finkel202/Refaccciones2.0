@@ -7,6 +7,7 @@ const ensureLogin = require("connect-ensure-login");
 
 // User model
 const User = require("../models/user");
+const Part = require("../models/parts");
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -59,11 +60,6 @@ authRoutes.post("/login", passport.authenticate("local", {
   failureFlash: true,
   passReqToCallback: true
 }));
-
-
-authRoutes.get("/profile", ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  res.render("profile", { user: req.user });
-});
 
 authRoutes.get("/logout", (req, res) => {
   req.logout();
@@ -162,16 +158,39 @@ authRoutes.post("/edit-user", checkAdmin, (req,res,next)=>{
 
  authRoutes.get("/");
 
-authRoutes.get("/singup", (req, res, next)=>{
+authRoutes.get("/signup", (req, res, next)=>{
 
 })
+
+authRoutes.get("/profile", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  res.render("profile", { user: req.user });
+});
+
+authRoutes.get("/profile/edit/:id",ensureLogin.ensureLoggedIn(),(req,res,next)=>{
+  User.findById({"_id": req.params.id})
+  .then (user =>{
+    res.render("edit", {user});
+  })
+  .catch(err =>{
+    console.log(err)
+  })
+});
+ authRoutes.post("/profile/edit/:id",ensureLogin.ensureLoggedIn(),(req,res,next)=>{
+   User.findByIdAndUpdate({"_id": req.params.id}, {username})
+   .then((user)=>{
+     res.redirect("profile")
+   })
+   .catch((err)=>{
+     console.log(err)
+   })
+ });
 
 // Get parts
 
 authRoutes.get("/parts", (req, res ,next)=>{
   Part.find()
   .then (parts =>{
-    let user = req.user._id
+    let user = req.user.id
     res.render("parts", {parts});
   })
   .catch(err =>{

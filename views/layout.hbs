@@ -6,16 +6,13 @@
   </head>
   <body>
     {{#if user}}
-      <a href="#">Caca</a>
-      <a href="#">Search</a>
+      <a href="/profile">Perfil</a>
       <a href="/logout">Logout</a>
+      <a href="/parts">Catalogo</a>
+      <a href="/edit_user">Editar usuario</a>
       {{else}}
       <p><a href="/login">Lorgin</a>or<a href="/signup">Signup</a></p>
-      {{#if user.role === "admin"}}
-
-      {{/if}}
-
-
+    {{/if}}
     {{#if user}}
         {{user.username}}
     {{/if}}

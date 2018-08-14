@@ -1,5 +1,6 @@
+const Store = require("../models/store")
 const mongoose = require("mongoose");
-const Schema = mongoose.userSchema
+const Schema = mongoose.Schema;
 
 
 const partSchema = new Schema({
@@ -7,10 +8,10 @@ const partSchema = new Schema({
   brand: String,
   carModel: String,
   year: String,
-  //store: String
+  store: [{type: Schema.ObjectId, ref: 'store'}]
 },{
   timestamps:{
-    createdAt "createdAt",
+    createdAt: "createdAt",
     updatedAt: "updatedAt"
   }
 });

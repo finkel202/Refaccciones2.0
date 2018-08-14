@@ -1,0 +1,30 @@
+<br>
+<h2>Edita tu Perfil</h2>
+<br>
+
+<form  action="/profiel/edit/{{user._id}}" method="post">
+  <div class="">
+    <label for="username">Nombre de Usuario</label>
+    <input type="text" name="username" value="{{user.username}}">
+  </div>
+  <div class="">
+    <label for="address">Calle</label>
+    <input type="text" name="street" value="{{user.address.street}}">
+  </div>
+  <div class="">
+    <label for="postalCode">Codigo postal</label>
+    <input type="number" name="postalCode" value="{{user.address.postalCode}}">
+  </div>
+  <div class="">
+    <label for="city">Ciudad</label>
+    <input type="text" name="city" value="{{user.address.city}}">
+  </div>
+  <div class="">
+    <label for="state">Estado</label>
+    <input type="text" name="state" value="{{user.address.state}}">
+  </div>
+  <br>
+  <div class="">
+    <input type="submit" value="Guardar cambios">
+  </div>
+</form>

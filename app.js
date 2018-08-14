@@ -28,14 +28,13 @@ mongoose.connect("mongodb://localhost/refacciones",{useMongoClient: true})
   console.log("Error conecting to mongo", err)
 });
 
-// mongoose.Promise = Promise;
-// mongoose
-//   .connect('mongodb://deathflyercharlie:ag2NEjnvy8lyevtH@cluster0-shard-00-00-eevwd.mongodb.net:27017,cluster0-shard-00-01-eevwd.mongodb.net:27017,cluster0-shard-00-02-eevwd.mongodb.net:27017/lab-nodemailer?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true', {useMongoClient: true})
-//   .then(() => {
-//     console.log('Connected to Mongo Refacciones!')
-//   }).catch(err => {
-//     console.error('Error connecting to mongo', err)
-//   });
+mongoose.Promise = Promise;
+mongoose.connect('mongodb://findandfix:F1nd&fix@ds221292.mlab.com:21292/findandfix', {useMongoClient: true})
+  .then(() => {
+    console.log('Connected to Mongo Refacciones!')
+  }).catch(err => {
+    console.error('Error connecting to mongo', err)
+  });
 
 
 const app_name = require('./package.json').name;
@@ -66,7 +65,7 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 
 // default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
+app.locals.title = 'Find&Fix';
 
 // configuration of passport security
 
@@ -121,8 +120,8 @@ app.use(passport.session());
 
 
 
-const index = require('./routes/index');
-app.use('/', index);
+// const index = require('./routes/index');
+// app.use('/', index);
 
 const authRoutes = require("./routes/auth-routes");
 app.use('/', authRoutes);
