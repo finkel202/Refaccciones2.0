@@ -1,0 +1,19 @@
+<br>
+<h2>Catalogo de tiendas</h2>
+<br>
+
+ <table>
+   <tr>
+     <td>Nombre</td>
+     <td>Dirección</td>
+
+   </tr>
+   {{#each store}}
+   <tr>
+     <td>{{name}}</td>
+     <td>{{address.street}}</td>
+     <td>{{address.number}}</td>
+     <td>{{address.city}}</td>
+   </tr>
+   {{/each}}
+ </table>

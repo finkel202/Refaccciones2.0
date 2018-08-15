@@ -8,6 +8,7 @@ const ensureLogin = require("connect-ensure-login");
 // User model
 const User = require("../models/user");
 const Part = require("../models/parts");
+const Store = require("../models/store");
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -214,5 +215,15 @@ authRoutes.post("/parts/add",(req,res,next)=>{
   })
 })
 
+authRoutes.get("/stores", (req, res, next)=>{
+  Store.find().populate("parts")
+  .then (store =>{
+    let user = req.user.id
+    res.render("stores", {store});
+  })
+  .catch(err =>{
+    next(err)
+  })
+});
 
 module.exports = authRoutes;

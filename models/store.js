@@ -1,4 +1,4 @@
-const Parts = require("../models/parts")
+const Parts = require("../models/parts");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -12,7 +12,7 @@ const storeSchema = new Schema({
     Country: String,
   },
   location: { type: {type: String}, coordinates: [Number]},
-  parts: [{type: Schema.ObjectId, ref: 'parts'}]
+  parts: [{type: Schema.ObjectId, ref: 'Parts'}]
 },{
   timestamps:{
     createdAt: "createdAt",

@@ -19,14 +19,14 @@ const flash      = require("connect-flash");
 const User = require("./models/user");
 // const Parts = require("")
 
-mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/refacciones",{useMongoClient: true})
-.then(()=>{
-  console.log("Conected to Mongo")
-})
-.catch(err =>{
-  console.log("Error conecting to mongo", err)
-});
+// mongoose.Promise = Promise;
+// mongoose.connect("mongodb://localhost/refacciones",{useMongoClient: true})
+// .then(()=>{
+//   console.log("Conected to Mongo")
+// })
+// .catch(err =>{
+//   console.log("Error conecting to mongo", err)
+// });
 
 mongoose.Promise = Promise;
 mongoose.connect('mongodb://findandfix:F1nd&fix@ds221292.mlab.com:21292/findandfix', {useMongoClient: true})
