@@ -1,0 +1,14 @@
+<br>
+<br>
+<form class="" action="/search" method="post">
+  <input type="text" name="searchBar" placeholder="Nombre de la pieza">
+  <button type="submit" name="button">Buscar</button>
+</form>
+
+{{#each parts}}
+
+<div>
+    <h2>Nombre pieza: {{this.name}} </h2>
+</div>
+
+{{/each}}

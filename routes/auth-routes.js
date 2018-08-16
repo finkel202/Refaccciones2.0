@@ -5,6 +5,7 @@ const passport = require('passport');
 const ensureLogin = require("connect-ensure-login");
 
 
+
 // User model
 const User = require("../models/user");
 const Part = require("../models/parts");
@@ -90,7 +91,7 @@ const checkProvider = checkRoles("provider");
 
 //Get Home page
 authRoutes.get('/', (req, res, next) => {
-  res.render('index');
+  res.render('index', {"user":req.user});
 });
 
 //Edit User
@@ -105,7 +106,7 @@ authRoutes.get("/edit-user", checkAdmin,(req, res, next)=>{
 
 authRoutes.post("/edit-user", checkAdmin, (req,res,next)=>{
   const username = req.body.username;
-  console.log('-------------',username);
+  //console.log('-------------',username);
   const password = req.body.password;
   const role = req.body.role;
   const email = req.body.email;
@@ -225,5 +226,19 @@ authRoutes.get("/stores", (req, res, next)=>{
     next(err)
   })
 });
+
+//get Search
+
+authRoutes.get("/search", (req, res ,next)=>{
+  res.render("search")
+});
+
+authRoutes.post("/search", (req,res,next)=>{
+  Part.find({name: {$regex: req.body.searchBar, $options: "i"}})
+    .then(parts=>{
+    res.render("search", {parts})
+  })
+  .catch(err=>{console.log(err)})
+})
 
 module.exports = authRoutes;

@@ -6,7 +6,7 @@ const userSchema = new Schema({
   password: String,
   userImage: String,
   email: String,
-  storeID: {type: Schema.ObjectId, ref: 'store'},
+  storeID: {type: mongoose.Schema.Types.ObjectId, ref: 'Store'},
   address:{address: String, city: String, state: String, postalCode: Number },
   phoneNumber: Number,
   role:{type: String, enum:['admin', 'provider', 'normalUser'], default:'normalUser'}
