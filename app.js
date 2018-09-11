@@ -17,7 +17,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const MongoStore = require('connect-mongo')(session);
 const flash      = require("connect-flash");
 const User = require("./models/user");
-// const Parts = require("")
+const Parts = require("./models/parts")
 
 // mongoose.Promise = Promise;
 // mongoose.connect("mongodb://localhost/refacciones",{useMongoClient: true})
